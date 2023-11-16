@@ -37,9 +37,7 @@ export default function Home() {
             >
               {/* Mapea los tipos de viaje y crea opciones en el dropdown */}
               {Object.keys(types).map((tripType) => (
-                <option
-                   key={tripType} 
-                   value={tripType}>
+                <option key={tripType} value={tripType}>
                   {types[tripType]}
                 </option>
               ))}

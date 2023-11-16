@@ -38,10 +38,4 @@ con.connect(function (err) {
   con.end();
 
 
-  // con.query(migrationSQL, function (err, result) {
-  //   if (err) throw err;
-  //   console.log("Migration was completed");
-  // });
-
-  // con.end();
 });

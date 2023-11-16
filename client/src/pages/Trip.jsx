@@ -52,11 +52,7 @@ export default function Trip() {
     } catch (error) {}
   }
 
-  // Hook useInterval para ejecutar getLocationAndCreateInterval cada 5 segundos si el viaje ha comenzado
-  useInterval(() => {
-    if (hasStarted) getLocationAndCreateInterval();
-  }, 5000);
-
+  
   // Función para obtener la ubicación y crear un nuevo intervalo
   async function getLocationAndCreateInterval() {
     console.log("Trip ID:", trip_id);
@@ -64,28 +60,32 @@ export default function Trip() {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const interval_latitude = position.coords.latitude;
         const interval_longitude = position.coords.longitude;
-
-      // Crea un nuevo intervalo con la ubicación actual y el ID del viaje
+        
+        // Crea un nuevo intervalo con la ubicación actual y el ID del viaje
         createNewInterval({ interval_latitude, interval_longitude, trip_id });
       });
     }
   }
-   // Funciones para manejar eventos de inicio, parada y reanudación del viaje
+  // Funciones para manejar eventos de inicio, parada y reanudación del viaje
   const handleStart = async () => {
-     // Obtiene el ID del nuevo viaje y lo almacena en trip_id
+    // Obtiene el ID del nuevo viaje y lo almacena en trip_id
     trip_id = await createNewTrip();
     console.log(trip_id);
     setHasStarted(true);
   };
   const handleStop = async () => {
-     // Cambia el estado a indicar que el viaje se ha detenido
+    // Cambia el estado a indicar que el viaje se ha detenido
     setHasStarted(false);
   };
   const handleResume = async () => {
-     // Cambia el estado a indicar que el viaje se ha reanudado
+    // Cambia el estado a indicar que el viaje se ha reanudado
     setHasStarted(true);
   };
   
+  // Hook useInterval para ejecutar getLocationAndCreateInterval cada 5 segundos si el viaje ha comenzado
+  useInterval(() => {
+    if (hasStarted) getLocationAndCreateInterval();
+  }, 5000);
 
   return (
     <div className="container mt-4">
@@ -111,7 +111,6 @@ export default function Trip() {
               </button>
             </div>
           </div>
-           {/* Botón para reanudar el viaje, visible solo si el viaje está detenido */}
           {!hasStarted && (
             <div className="row mt-2">
               <div className="col-md-12">
