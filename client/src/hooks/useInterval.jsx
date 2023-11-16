@@ -17,7 +17,6 @@ function useInterval(callback, delay) {
       return () => clearInterval(id);
     }
   }, [delay]);
-  // do I have to add the getLocation and Create Interval
 }
 
 export default useInterval;

@@ -22,3 +22,14 @@ CREATE TABLE `intervals`(
 );
 ALTER TABLE
     `intervals` ADD CONSTRAINT `intervals_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `Trips`(`id`);
+
+
+
+-- DROP TABLE IF EXISTS `users`; 
+
+-- CREATE TABLE `users`(
+-- 	`id` INT NOT NULL AUTO_INCREMENT, 
+-- 	`username` VARCHAR(255) NOT NULL, 
+-- 	`password` VARCHAR(255) NOT NULL, 
+-- 	PRIMARY KEY (id)
+-- );

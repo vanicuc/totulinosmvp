@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+// Importa el módulo types que contiene los tipos de viaje
 import types from "../utilities/types";
+// Importa el hook useInterval personalizado
 import useInterval from "../hooks/useInterval";
 // import Map from "../Map";
 
+
+// Declara una variable global para almacenar el ID del viaje
 let trip_id = null;
 export default function Trip() {
+    // Estado para verificar si el viaje ha comenzado
   const [hasStarted, setHasStarted] = useState(false);
+  // Obtiene el parámetro type_id de la URL
   const { type_id } = useParams();
+  // Estado para almacenar los intervalos del viaje
   const [intervals, setIntervals] = useState([]);
 
   async function createNewTrip() {
@@ -23,10 +30,12 @@ export default function Trip() {
       });
 
       const result = await response.json();
+          // Retorna el ID del viaje creado
       return result.trip_id;
     } catch (error) {}
   }
 
+   // Función asincrónica para crear un nuevo intervalo
   async function createNewInterval(interval) {
     console.log("new interval", interval);
     try {
@@ -38,10 +47,17 @@ export default function Trip() {
         body: JSON.stringify(interval),
       });
       const result = await response.json();
+      // Actualiza el estado de los intervalos con la respuesta del servidor
       setIntervals(result);
     } catch (error) {}
   }
 
+  // Hook useInterval para ejecutar getLocationAndCreateInterval cada 5 segundos si el viaje ha comenzado
+  useInterval(() => {
+    if (hasStarted) getLocationAndCreateInterval();
+  }, 5000);
+
+  // Función para obtener la ubicación y crear un nuevo intervalo
   async function getLocationAndCreateInterval() {
     console.log("Trip ID:", trip_id);
     if ("geolocation" in navigator) {
@@ -49,24 +65,27 @@ export default function Trip() {
         const interval_latitude = position.coords.latitude;
         const interval_longitude = position.coords.longitude;
 
+      // Crea un nuevo intervalo con la ubicación actual y el ID del viaje
         createNewInterval({ interval_latitude, interval_longitude, trip_id });
       });
     }
   }
+   // Funciones para manejar eventos de inicio, parada y reanudación del viaje
   const handleStart = async () => {
+     // Obtiene el ID del nuevo viaje y lo almacena en trip_id
     trip_id = await createNewTrip();
     console.log(trip_id);
     setHasStarted(true);
   };
   const handleStop = async () => {
+     // Cambia el estado a indicar que el viaje se ha detenido
     setHasStarted(false);
   };
   const handleResume = async () => {
+     // Cambia el estado a indicar que el viaje se ha reanudado
     setHasStarted(true);
   };
-  useInterval(() => {
-    if (hasStarted) getLocationAndCreateInterval();
-  }, 5000);
+  
 
   return (
     <div className="container mt-4">
@@ -92,6 +111,7 @@ export default function Trip() {
               </button>
             </div>
           </div>
+           {/* Botón para reanudar el viaje, visible solo si el viaje está detenido */}
           {!hasStarted && (
             <div className="row mt-2">
               <div className="col-md-12">
@@ -106,10 +126,13 @@ export default function Trip() {
             </div>
           )}
 
+           {/* Muestra el número de viaje actual */}
           <h2 className="mt-4">{`Trip number: ${trip_id}`}</h2>
 
+           {/* Muestra los intervalos si el viaje ha comenzado */}
           {hasStarted && <h6>These are your intervals:</h6>}
 
+            {/* Lista los intervalos */}
           <ul>
             {intervals.map((interval) => (
               <li key={interval.id}>
@@ -119,6 +142,7 @@ export default function Trip() {
             ))}
           </ul>
         </div>
+         {/* Columna para el componente Map (comentado por ahora) */}
         <div className="col-md-4">{/* <Map intervals={intervals} /> */}</div>
       </div>
     </div>
