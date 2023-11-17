@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
+var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 
 //GETs all trips
-router.get("/trips", function (req, res, next) {
+router.get("/trips", userShouldBeLoggedIn, function (req, res, next) {
   db("SELECT * FROM trips;")
     .then((results) => {
       res.send(results.data);
@@ -12,7 +13,7 @@ router.get("/trips", function (req, res, next) {
 });
 
 //GET trip depending from id
-router.get("/trips/:id", function (req, res, next) {
+router.get("/trips/:id", userShouldBeLoggedIn, function (req, res, next) {
   const { id } = req.params;
   db(`SELECT * FROM trips WHERE id=${id} ;`)
     .then((results) => {
@@ -24,9 +25,10 @@ router.get("/trips/:id", function (req, res, next) {
 //INSERT a new trip into trip_type and returns the id
 router.post("/trips/new", async function (req, res, next) {
   const { name } = req.body;
+  //  const { users_id } = req.params; ${users_id}}
   try {
     //select from trips - order by id descending-limit results to 1
-    await db(`INSERT INTO trips (name) VALUES ( "${name}");`);
+    await db(`INSERT INTO trips (name) VALUES ( "${name}" );`);
     const result = await db("SELECT id FROM trips ORDER BY id DESC LIMIT 1");
     //grab trip id - send to client as an object
     res

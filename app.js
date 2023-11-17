@@ -1,6 +1,7 @@
    // "jsonwebtoken": "^9.0.2" 
    //(en pacq ver si va)
    // esto lo que puso en el ejemplo  "jsonwebtoken": "^8.5.1",
+      // "migrate": "node model/database.js"
 
    var createError = require("http-errors");
    var express = require("express");

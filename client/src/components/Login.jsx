@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
-function Login() {
+function Login({setIsLoggedIn}) {
+
   const [credentials, setCredentials] = useState({
     username: "test",
     password: "test",
@@ -27,10 +28,13 @@ function Login() {
       localStorage.setItem("token", data.token);
       console.log(data.message, data.token);
       setData(data.message);
+      setIsLoggedIn(true);
     } catch (error) {
       console.log(error);
       setData(error.message);
+      
     }
+
   };
 
   const logout = () => {
@@ -46,6 +50,8 @@ function Login() {
       });
       setData(data.message);
       console.log(data.message);
+      setIsLoggedIn(false);
+
     } catch (error) {
       console.log(error);
       setData(error.message);
@@ -88,7 +94,14 @@ function Login() {
         <div className="text-center p-4">
           <div className="alert">{data}</div>
         </div>
+
       )}
+
+<marquee>
+          🚴‍♀️ 🚴‍♀️🍅 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🍅🚴‍♀️ 🚴🏾‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴🏾‍♀️ 🚴‍♀️ 🚴🏾‍♀️🍅 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️
+          🚴‍♀️ 🚴‍♀️ 🚴‍♀️{" "}
+        </marquee>
+        
     </div>
   );
 }

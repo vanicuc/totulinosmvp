@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
  // Importa el módulo de tipos de viaje
 import types from "../utilities/types";  
 
+
 export default function Home() {
   // Estado para almacenar el tipo de viaje seleccionado
   const [selectedTrip, setSelectedTrip] = useState(1);
@@ -53,15 +54,16 @@ export default function Home() {
 
           </div>
         </div>
-        <marquee>
+        {/* <marquee>
           🚴‍♀️ 🚴‍♀️🍅 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🍅🚴‍♀️ 🚴🏾‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴🏾‍♀️ 🚴‍♀️ 🚴🏾‍♀️🍅 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️ 🚴‍♀️
           🚴‍♀️ 🚴‍♀️ 🚴‍♀️{" "}
-        </marquee>
+        </marquee> */}
+        
         {/* Outlet para renderizar componentes secundarios
          basados en la ruta */}
       <Outlet />
       </div>
-      <Outlet />
+    
     </div>
   );
 }
