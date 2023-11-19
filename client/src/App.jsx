@@ -4,6 +4,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Trip from "./pages/Trip";
 import Login from "./components/Login.jsx";
+import Map from "./components/Map.jsx";
 
 
 function App() {
@@ -25,30 +26,29 @@ function App() {
         <div>
 
         {!isLoggedIn && <Login setIsLoggedIn={(value) => setIsLoggedIn(value)} />}
-          {isLoggedIn && <Link to="/" className="btn btn-dark btn-sm">
+          {isLoggedIn && <>
+          <Link to="/" className="btn btn-dark btn-sm">
             Home
-          </Link>}
-
-
-         {/* {!isLoggedIn && <Link to="/login"></Link>}
-          {isLoggedIn && <Link to="/" className="btn btn-dark btn-sm">
-            Home
-          </Link>} */}
-
+          </Link>
+          {/* <Link to="/trips/new/:type_id/Map" >
+          Map
+        </Link> */}
+        </>
+          }
         </div>
 
         <Routes>
 
-       {/* <Route path="/login" element={<Login setIsLoggedIn={(value) => setIsLoggedIn(value)} />} />
-       <Route path="/" element={<Home />} >
-            <Route path="/trips/new/:type_id" element={<Trip />} />
-          </Route>*/}
 
-        {!isLoggedIn && <Route path="/login" element={<Login setIsLoggedIn={(value) => setIsLoggedIn(value)} />} />}
-        {isLoggedIn && <Route path="/" element={<Home />} >
+         {!isLoggedIn && (
+           <Route 
+           path="/login" 
+           element={<Login setIsLoggedIn={value => setIsLoggedIn(value)} />}
+            />)}
+         {isLoggedIn && 
+         <Route path="/" element={<Home />} >
             <Route path="/trips/new/:type_id" element={<Trip />} />
-          
-
+            {/* <Route path="/trips/new/:type_id/Map" element={<Map />} /> */}
           </Route>}
         </Routes>
       </div>
@@ -61,3 +61,26 @@ export default App;
 
 
 
+{/* <Routes> */}
+// {!isLoggedIn && <Route path="/login" element={<Login setIsLoggedIn={(value) => setIsLoggedIn(value)} />} />}
+// {isLoggedIn && <Route path="/" element={<Home />} >
+//     <Route path="/trips/new/:type_id" element={<Trip />} />
+//  
+  
+
+//   </Route>}
+// </Routes>
+
+
+
+ {/* <Route path="/login" element={<Login setIsLoggedIn={(value) => setIsLoggedIn(value)} />} />
+       <Route path="/" element={<Home />} >
+            <Route path="/trips/new/:type_id" element={<Trip />} />
+          </Route>*/}
+
+
+
+             {/* {!isLoggedIn && <Link to="/login"></Link>}
+          {isLoggedIn && <Link to="/" className="btn btn-dark btn-sm">
+            Home
+          </Link>} */}

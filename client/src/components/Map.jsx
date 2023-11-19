@@ -1,10 +1,55 @@
-// // MapComponent.js
+
+import React, { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+const Map = ({ intervals }) => {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    // Crea el mapa si no existe
+    if (!mapRef.current) {
+      mapRef.current = L.map('map').setView([0, 0], 2); // Establece la vista inicial
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current); // Capa de mapas base
+    }
+
+    // Elimina marcadores existentes
+    mapRef.current.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        mapRef.current.removeLayer(layer);
+      }
+    });
+
+    // Agrega marcadores para cada intervalo
+    intervals.forEach((interval, index) => {
+      L.marker([interval.interval_latitude, interval.interval_longitude])
+        .addTo(mapRef.current)
+        .bindPopup(`Interval ${index + 1}`);
+    });
+  }, [intervals]);
+
+  return <div id="map" style={{ height: '400px' }}></div>;
+};
+
+export default Map;
+
+
+
+
+
+
+
+
+
+// import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+
+// const Map = () => {
+
+// MapComponent.js
 // import React, { useEffect, useState } from "react";
 // import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-// import L from "leaflet";
-// L.Icon.Default.imagePath = "/path/to/leaflet/images/";
 
-// const Map = ({ intervals }) => {
+//  const Map = ({ intervals }) => {
 //   const [mapId] = useState(`map-${Math.random()}`);
 
 //   useEffect(() => {
@@ -30,7 +75,7 @@
 //     });
 //   }, [intervals, mapId]);
 
-//   return (
+  
 //     <div id={mapId} style={{ height: "400px" }}>
 //       <MapContainer
 //         center={[0, 0]}
@@ -52,6 +97,4 @@
 //       </MapContainer>
 //     </div>
 //   );
-// };
-
-// export default Map;
+//  };

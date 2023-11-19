@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import types from "../utilities/types";
 // Importa el hook useInterval personalizado
 import useInterval from "../hooks/useInterval";
-// import Map from "../Map";
+ import Map from "../components/Map";
+// import { Link, Outlet } from "react-router-dom";
 
 
 // Declara una variable global para almacenar el ID del viaje
@@ -68,6 +69,7 @@ export default function Trip() {
       });
     }
   }
+  
   // Funciones para manejar eventos de inicio, parada y reanudación del viaje
   const handleStart = async () => {
     // Obtiene el ID del nuevo viaje y lo almacena en trip_id
@@ -144,7 +146,9 @@ export default function Trip() {
           </ul>
         </div>
          {/* Columna para el componente Map (comentado por ahora) */}
-        <div className="col-md-4">{/* <Map intervals={intervals} /> */}</div>
+        <div className="col-md-4">
+        <Map intervals={intervals} />
+       </div>
       </div>
     </div>
   );
