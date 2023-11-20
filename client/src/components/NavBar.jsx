@@ -2,14 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
+import './NavBar.css'
+
 export default function NavBar() {
   const { isLoggedIn, onLogout } = useAuth();
   return (
-    <div>
-      <Link to="/">Home</Link>
-      {!isLoggedIn && <Link to="/login">Login</Link>}
-      {isLoggedIn && <Link to="/trips/new/:type_id">Trips</Link>}
-      {isLoggedIn && <button onClick={onLogout}>Logout</button>}
-    </div>
+    <nav className="navbar">
+      <ul>
+        <li><Link to="/">Home</Link></li>
+          {!isLoggedIn && <li><Link to="/login">Login</Link></li>}
+          {isLoggedIn && (
+            <>
+              <li className="trips-link"><Link to="/trips/new/:type_id">Trips</Link></li>
+              <li className="logout-button"><span onClick={onLogout}>Logout</span></li>
+          </>
+          )}
+      </ul>
+    </nav>
   );
 }

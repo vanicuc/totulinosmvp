@@ -9,7 +9,7 @@ export default function AuthProvider({ children }) {
 
   function onLogin() {
     setIsLoggedIn(true);
-    navigate("/private");
+    navigate("/");
   }
 
   function onLogout() {

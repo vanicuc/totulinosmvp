@@ -9,17 +9,12 @@
     font-size:11px;
     line-height:32px;
     text-transform: uppercase;
-    /* background-color:#b7e4ba; */
     float:left;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .button{
-    opacity: 0.50;
-    -moz-opacity: .50;
-    filter:alpha (opacity=50);
-  }
+ 
   .button.start {
     background-color: #4caf50; 
   }

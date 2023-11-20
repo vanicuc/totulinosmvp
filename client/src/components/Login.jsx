@@ -2,17 +2,17 @@
 import { useState } from "react";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+// import "./login.css";
 
 function Login() {
   const { onLogin } = useAuth();
-
   const [credentials, setCredentials] = useState({
-    username: "test",
-    password: "test",
+    username: "",
+    password: "",
   });
 
   const [data, setData] = useState(null);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { username, password } = credentials;
 
   const handleChange = (e) => {
@@ -26,7 +26,7 @@ function Login() {
         method: "POST",
         data: credentials,
       });
-
+      setIsLoggedIn(true);
       //store it locally
       localStorage.setItem("token", data.token);
       onLogin();
@@ -38,6 +38,7 @@ function Login() {
 
   const logout = () => {
     localStorage.removeItem("token");
+    setIsLoggedIn(false);
     console.log("Logged out");
   };
 
@@ -83,14 +84,30 @@ function Login() {
               className="form-control mb-2"
               required
             />
-            {/* <div className="d-flex gap-2 justify-content-center"> */}
-              <button className="Ingresar" tittle="Ingresar" onClick={login}>
+            <div className="d-flex gap-2 justify-content-center">
+
+              {/* Mostrar el botón de inicio de sesión solo si no está iniciada la sesión */}
+        {!isLoggedIn && (
+          <button className="btn btn-outline-dark ml-2" onClick={login}>
+            Log in
+          </button>
+        )}
+
+        {/* Mostrar el botón de cierre de sesión solo si está iniciada la sesión */}
+        {isLoggedIn && (
+          <button className="btn btn-outline-dark ml-2" onClick={logout}>
+            Log out
+          </button>
+        )}
+
+{/*               
+              <button className="btn btn-outline-dark ml-2"  onClick={login}>
                 Log in
               </button>
               <button className="btn btn-outline-dark ml-2" onClick={logout}>
                 Log out
-              </button>
-            {/* </div> */}
+              </button> */}
+            </div>
           
         </div>
       </div>
@@ -104,12 +121,32 @@ function Login() {
               
         </div>
       </div>
+      <img
+        src="/5562de8abbac0d937cfddde0eddab83b.jpg"
+        alt="background"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          opacity: 0.1, // Ajusta este valor para cambiar la opacidad
+          pointerEvents: 'none', // Evita que la imagen capture eventos de puntero
+        }}
+      />
     </div>
   </>
   );
 }
 
 export default Login;
+
+
+
+{/* {
+//       (localStorage.getItem("token")) ? 
+//       (<Home/>) : (<Login/>)    */}
 
 
 

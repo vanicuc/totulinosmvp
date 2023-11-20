@@ -1,0 +1,55 @@
+/* Estilos globales para el cuerpo */
+body {
+    padding: 0;
+    margin: 0; 
+ 
+    font-family: "San Francisco", BlinkMacSystemFont, "Segoe UI", 
+    Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+  
+  /* Estilos específicos para la barra de navegación */
+  nav {
+   position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #e5e5e9; 
+    padding: 1px 10px 1px 10px;
+  }
+  
+  /* Estilos para la lista de navegación en la barra de navegación */
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /
+  }
+  
+  /* Estilos para los elementos de la lista de navegación */
+  nav li {
+    display: inline-block;
+  }
+  nav li.trips-link {
+    margin-right: 10px; /* Ajusta el espacio entre "Trips" y el siguiente elemento */
+  }
+  nav li.logout-button {
+    margin-left: left; /* Coloca el botón de logout en la esquina derecha */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido del botón de logout */
+  }
+
+  nav li span {
+    padding: 5px 10px; /* Ajusta el relleno del span para hacerlo más parecido a un botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el span para indicar que es interactivo */
+  }
+  
+  
+  nav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    font-size: 16px; 
+  }

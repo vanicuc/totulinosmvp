@@ -1,6 +1,4 @@
 
-import { useState } from "react";
-import "./App.css";
 import { Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Trip from "./pages/Trip";
@@ -22,9 +20,7 @@ function App() {
           <Route path="/trips/new/:type_id"
             element={
               <RequireAuth>
-                {/* <PrivateDashboard /> */}
                 <Trip/>
-                {/* <Home/> */}
               </RequireAuth>
             }
 
@@ -36,6 +32,18 @@ function App() {
   );
 }
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
 
 //---------------------------------------------------
 

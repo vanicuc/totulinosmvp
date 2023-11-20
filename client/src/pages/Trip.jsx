@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-// Importa el módulo types que contiene los tipos de viaje
 import types from "../utilities/types";
-// Importa el hook useInterval personalizado
 import useInterval from "../hooks/useInterval";
 import Map from "../components/Map";
 import "./Trip.css";
 
-// import { Link, Outlet } from "react-router-dom";
-
 
 // Declara una variable global para almacenar el ID del viaje
 let trip_id = null;
+
+
 export default function Trip() {
-    // Estado para verificar si el viaje ha comenzado
+   // Estado para verificar si el viaje ha comenzado
   const [hasStarted, setHasStarted] = useState(false);
   // Obtiene el parámetro type_id de la URL
   const { type_id } = useParams();
@@ -36,7 +34,7 @@ export default function Trip() {
 
       const result = await response.json();
       console.log(result)
-          // Retorna el ID del viaje creado
+      // Retorna el ID del viaje creado
       return result.trip_id;
     } catch (error) {}
   }
@@ -74,7 +72,7 @@ export default function Trip() {
     }
   }
   
-  // Funciones para manejar eventos de inicio, parada y reanudación del viaje
+  
   const handleStart = async () => {
     // Obtiene el ID del nuevo viaje y lo almacena en trip_id
     trip_id = await createNewTrip();
@@ -90,7 +88,8 @@ export default function Trip() {
     setHasStarted(true);
   };
   
-  // Hook useInterval para ejecutar getLocationAndCreateInterval cada 5 segundos si el viaje ha comenzado
+  // Hook useInterval para ejecutar getLocationAndCreateInterval 
+  // cada 5 segundos si el viaje ha comenzado
   useInterval(() => {
     if (hasStarted) getLocationAndCreateInterval();
   }, 5000);
@@ -110,6 +109,7 @@ export default function Trip() {
       <div className="row">
         <div className="col-md-8">
           <div className="row">
+              <h3>{`${types[type_id]}`}</h3>
             <div className="col-md-6 d-flex justify-content-center">
               <button
                 onClick={handleButtonClick}
@@ -117,11 +117,14 @@ export default function Trip() {
                 className={`button ${hasStarted ? 'stop' : 'start'}`}
               >
                 {hasStarted ? 'Stop' : 'Start'}
-            
+                {/* <img
+                    src={hasStarted ? "./images/stop-icon.png" : "./images/play-icon.png"}
+                    alt={hasStarted ? "Stop" : "Play"}
+                  /> */}
               </button>
             </div>
           </div>
-          {/* {!hasStarted && (
+          {!hasStarted && (
             <div className="row mt-2">
               <div className="col-md-12">
                 <button
@@ -129,27 +132,13 @@ export default function Trip() {
                   type="button"
                   className="btn btn-warning btn-block"
                 >
-                  Resume Biking
+                  Pause
                 </button>
               </div>
             </div>
-          )} */}
-
+          )}
            {/* Muestra el número de viaje actual */}
           <h4 className="mt-4">{`Trip number: ${trip_id}`}</h4>
-
-           {/* Muestra los intervalos si el viaje ha comenzado */}
-          {/* {hasStarted && <h6>These are your intervals:</h6>} */}
-
-            {/* Lista los intervalos */}
-          {/* <ul>
-            {intervals.map((interval) => (
-              <li key={interval.id}>
-                Longitude: {interval.interval_longitude}, Latitude:
-                {interval.interval_latitude}
-              </li>
-            ))}
-          </ul> */}
         </div>
          {/* Columna para el componente Map (comentado por ahora) */}
         <div className="col-md-4">
@@ -164,3 +153,16 @@ export default function Trip() {
 
 
 
+
+{/* Muestra los intervalos si el viaje ha comenzado */}
+{/* {hasStarted && <h6>These are your intervals:</h6>} */}
+
+ {/* Lista los intervalos */}
+{/* <ul>
+ {intervals.map((interval) => (
+   <li key={interval.id}>
+     Longitude: {interval.interval_longitude}, Latitude:
+     {interval.interval_latitude}
+   </li>
+ ))}
+</ul> */}
