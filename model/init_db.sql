@@ -17,7 +17,8 @@ CREATE TABLE `users`(
 
  CREATE TABLE `trips`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL
+    `name` VARCHAR(255) NOT NULL,
+    `user_id` INT NOT NULL
 );
 CREATE TABLE `intervals`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +28,8 @@ CREATE TABLE `intervals`(
     `interval_time` DATETIME NOT NULL
 );
 ALTER TABLE
-    `intervals` ADD CONSTRAINT `intervals_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `Trips`(`id`);
+    `intervals` ADD CONSTRAINT `intervals_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`);
 
--- ALTER TABLE
---     `trips` ADD CONSTRAINT `trips_id_foreign` FOREIGN KEY(`id`) REFERENCES `users`(`id`);
+ALTER TABLE
+    `trips` ADD CONSTRAINT `trips_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `users`(`id`);
+

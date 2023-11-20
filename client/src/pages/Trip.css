@@ -1,0 +1,29 @@
+.button{
+    width:60px;
+    height:60px;
+    margin: 5px;
+    padding:10px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    font-size:11px;
+    line-height:32px;
+    text-transform: uppercase;
+    /* background-color:#b7e4ba; */
+    float:left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button{
+    opacity: 0.50;
+    -moz-opacity: .50;
+    filter:alpha (opacity=50);
+  }
+  .button.start {
+    background-color: #4caf50; 
+  }
+  
+  .button.stop {
+    background-color: #f44336; 
+  }
