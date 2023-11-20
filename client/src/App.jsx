@@ -24,6 +24,7 @@ function App() {
               <RequireAuth>
                 {/* <PrivateDashboard /> */}
                 <Trip/>
+                {/* <Home/> */}
               </RequireAuth>
             }
 
