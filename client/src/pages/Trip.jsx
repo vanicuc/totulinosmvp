@@ -14,39 +14,41 @@ export default function Trip() {
    // Estado para verificar si el viaje ha comenzado
   const [hasStarted, setHasStarted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-
  
   // const [isFirstStart, setIsFirstStart] = useState(true);
   // Obtiene el parámetro type_id de la URL
   const { type_id } = useParams();
+  
+
   // Estado para almacenar los intervalos del viaje
   const [intervals, setIntervals] = useState([]);
 
-  // const user_id = getLoggedInUserId();
+ 
   let user_id = 1;
 
   async function createNewTrip() {
-    try {
+        try {
+          
+          const response = await fetch(`/api/trips/new/${user_id}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+              name: types[type_id],
+            }),
+          });
+    
+          const result = await response.json();
+          console.log(result)
+          // Retorna el ID del viaje creado
+          return result.trip_id;
+        } catch (error) {}
+      }
 
-      const response = await fetch(`/api/trips/new/${user_id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-          name: types[type_id],
-        }),
-      });
 
-      const result = await response.json();
-      console.log(result)
-      // Retorna el ID del viaje creado
-      return result.trip_id;
-    } catch (error) {}
-  }
-
-   // Función asincrónica para crear un nuevo intervalo
+     // Función asincrónica para crear un nuevo intervalo
   async function createNewInterval(interval) {
     console.log("new interval", interval);
     try {
@@ -64,6 +66,7 @@ export default function Trip() {
     } catch (error) {}
   }
 
+  
   
   // Función para obtener la ubicación y crear un nuevo intervalo
   async function getLocationAndCreateInterval() {

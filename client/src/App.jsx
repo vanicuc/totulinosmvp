@@ -6,7 +6,7 @@ import Login from "./components/Login.jsx";
 import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
 import AuthProvider from "./components/AuthProvider";
-import EachTrips from "./pages/EachTrips.jsx";
+// import EachTrips from "./pages/EachTrips.jsx";
 
 
 function App() {
@@ -18,7 +18,7 @@ return (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/EachTrips" element={<EachTrips />} />
+        {/* <Route path="/EachTrips" element={<EachTrips />} /> */}
         <Route path="/trips/new/:type_id"
           element={
             <RequireAuth>
