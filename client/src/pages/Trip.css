@@ -22,3 +22,13 @@
   .button.stop {
     background-color: #f44336; 
   }
+
+  .flex-container{
+    padding: 0px;
+    display:flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+  }

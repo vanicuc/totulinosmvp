@@ -13,7 +13,7 @@ export default function NavBar() {
           {!isLoggedIn && <li><Link to="/login">Login</Link></li>}
           {isLoggedIn && (
             <>
-              <li className="trips-link"><Link to="/trips/new/:type_id">Trips</Link></li>
+              <li className="EachTrips-link"><Link to="/Eachtrips">Trips</Link></li>
               <li className="logout-button"><span onClick={onLogout}>Logout</span></li>
           </>
           )}

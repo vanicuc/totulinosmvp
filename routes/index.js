@@ -25,6 +25,8 @@ router.get("/trips/:id", userShouldBeLoggedIn, function (req, res, next) {
 //INSERT a new trip into trip_type and returns the id
 router.post("/trips/new/:user_id", async function (req, res, next) {
   const{ user_id } = req.params;
+  // let user_id = req.login.user_id;
+
   const { name } = req.body;
   //  const { users_id } = req.params; ${users_id}}
   try {
